@@ -10,3 +10,7 @@ I use it to generate my stuff, but if you find it useful, feel free to contribut
 - Python 3.6+
 
 ## Usage
+
+
+## Testing
+  - To run tests, just simply run the run.py file like so: `python run.py test` or `python3 run.py test`
