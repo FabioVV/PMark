@@ -13,4 +13,4 @@ I use it to generate my stuff, but if you find it useful, feel free to contribut
 
 
 ## Testing
-  - To run tests, just simply run the run.py file like so: `python run.py test` or `python3 run.py test`
+  - To run tests, simply run the run.py file like so: `python run.py test` or `python3 run.py test`
