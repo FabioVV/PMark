@@ -33,3 +33,23 @@ class HTMLNode:
     @override
     def __repr__(self) -> str:
         return f"tag = {self.tag}\n value = {self.value}\n, children = {self.children}\n, attrs = {self.attrs_to_html()}\n)"
+
+
+class LeafNode(HTMLNode):
+    def __init__(
+        self,
+        tag: str | None = None,
+        value: str | None = None,
+        attrs: dict[str, str] | None = None,
+    ):
+        super().__init__(tag, value, None, attrs)
+
+    @override
+    def to_html(self) -> str:
+        if self.value is None or self.value == "":
+            raise ValueError("LeafNode value cannot be None")
+
+        if self.tag is None or self.tag == "":
+            return self.value
+
+        return f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"

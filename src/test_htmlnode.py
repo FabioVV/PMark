@@ -1,5 +1,5 @@
 import unittest
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 class TestHtmlNode(unittest.TestCase):
@@ -25,6 +25,13 @@ class TestHtmlNode(unittest.TestCase):
         )
 
         self.assertEqual(nd1.attrs_to_html(), ' class="header1" id="main-header"')
+
+    def test_leaf_to_h1(self):
+        nd1 = LeafNode("h1", "Hello, World!", {"class": "header1", "id": "main-header"})
+
+        self.assertEqual(
+            nd1.to_html(), '<h1 class="header1" id="main-header">Hello, World!</h1>'
+        )
 
 
 if __name__ == "__main__":
