@@ -1,8 +1,7 @@
 from __future__ import (
     annotations,
-)  # if this is not imported, the children type in the __init__ will throw a type error]
+)  # if this is not imported, the children type in the __init__ will throw a type error
 from typing import override
-from textnode import TextNode, TextType
 
 
 class HTMLNode:
@@ -35,6 +34,33 @@ class HTMLNode:
         return f"tag = {self.tag}\n value = {self.value}\n, children = {self.children}\n, attrs = {self.attrs_to_html()}\n)"
 
 
+class ParentNode(HTMLNode):
+    def __init__(
+        self,
+        tag: str | None,
+        children: list[HTMLNode] | None,
+        attrs: dict[str, str] | None = None,
+    ):
+        if tag is None or tag == "":
+            raise ValueError("HTML tag from a parentnode cannot be None or empty")
+        if children is None or children == []:
+            raise ValueError("children from a parentnode cannot be None or empty")
+
+        super().__init__(tag, None, children, attrs)
+
+    @override
+    def to_html(self) -> str:
+        if self.tag is None or self.tag == "":
+            raise ValueError("HTML tag from a parentnode cannot be None or empty")
+        if self.children is None or self.children == []:
+            raise ValueError("children from a parentnode cannot be None or empty")
+
+        children = "".join([child.to_html() for child in self.children])
+        html = f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
+
+        return html
+
+
 class LeafNode(HTMLNode):
     def __init__(
         self,
@@ -42,6 +68,9 @@ class LeafNode(HTMLNode):
         value: str | None = None,
         attrs: dict[str, str] | None = None,
     ):
+        if value is None or value == "":
+            raise ValueError("LeafNode value cannot be None")
+
         super().__init__(tag, value, None, attrs)
 
     @override
