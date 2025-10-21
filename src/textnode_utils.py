@@ -1,5 +1,6 @@
 from textnode import TextNode, TextType
 from htmlnode import LeafNode
+from markdown_utils import extract_markdown_images, extract_markdown_links
 
 
 def make_text_node(text: str, text_type: TextType, url: str | None = None) -> TextNode:
@@ -65,5 +66,37 @@ def split_nodes_delimiter(
                 new_nodes.append(text_node)
             else:
                 new_nodes.append(make_text_node(x, TextType.PLAIN_TEXT))
+
+    return new_nodes
+
+
+def split_nodes_image(old_nodes: list[TextNode]) -> list[TextNode]:
+    new_nodes: list[TextNode] = []
+
+    for i in old_nodes:
+        if i.text_type != TextType.PLAIN_TEXT:
+            new_nodes.append(i)
+            continue
+
+        links = extract_markdown_images(i.text)
+        new_nodes.extend(
+            [make_text_node(alt, TextType.LINK_TEXT, url) for alt, url in links]
+        )
+
+    return new_nodes
+
+
+def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
+    new_nodes: list[TextNode] = []
+
+    for i in old_nodes:
+        if i.text_type != TextType.PLAIN_TEXT:
+            new_nodes.append(i)
+            continue
+
+        links = extract_markdown_links(i.text)
+        new_nodes.extend(
+            [make_text_node(alt, TextType.LINK_TEXT, url) for alt, url in links]
+        )
 
     return new_nodes
