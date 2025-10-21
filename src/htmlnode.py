@@ -68,14 +68,14 @@ class LeafNode(HTMLNode):
         value: str | None = None,
         attrs: dict[str, str] | None = None,
     ):
-        if value is None or value == "":
+        if value is None:
             raise ValueError("LeafNode value cannot be None")
 
         super().__init__(tag, value, None, attrs)
 
     @override
     def to_html(self) -> str:
-        if self.value is None or self.value == "":
+        if self.value is None:
             raise ValueError("LeafNode value cannot be None")
 
         if self.tag is None or self.tag == "":
