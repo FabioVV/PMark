@@ -7,7 +7,7 @@ I use it to generate my stuff, but if you find it useful, feel free to contribut
 
 ## Requirements
 
-- Python 3.6+
+- Python 3.11+
 
 ## Usage
 
