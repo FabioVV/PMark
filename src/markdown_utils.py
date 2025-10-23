@@ -1,5 +1,5 @@
 from re import findall
-from htmlnode import HtmlNode
+from htmlnode import HTMLNode
 
 MARKDOWN_IMAGES_REGEX = r"!\[(.*?)\]\((.*?)\)"
 MARKDOWN_LINKS_REGEX = r"\[(.*?)\]\((.*?)\)"
@@ -18,4 +18,4 @@ def markdown_to_blocks(md_text: str) -> list[str]:
     return [block.strip() for block in md_blocks]
 
 
-def markdown_to_html_node(md_text: str) -> HtmlNode: ...
+def markdown_to_html_node(md_text: str) -> HTMLNode: ...
