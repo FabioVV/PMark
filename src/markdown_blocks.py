@@ -31,7 +31,7 @@ def block_to_block_type(md_text: str) -> BlockType:
                 return BlockType.PARAGRAPH
 
         return BlockType.ORDERED_LIST
-    elif md_text.startswith(">"):
+    elif md_text.startswith("> "):
         return BlockType.QUOTE
     elif md_text.startswith("```") and md_text.endswith("```"):
         return BlockType.CODE
