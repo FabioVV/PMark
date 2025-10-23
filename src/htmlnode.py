@@ -8,17 +8,21 @@ class HTMLNode:
     def __init__(
         self,
         tag: str | None = None,
-        value: str | None = None,
-        children: list[HTMLNode] | None = None,
-        attrs: dict[str, str] | None = None,
+        value: str = "",
+        children: list[HTMLNode] = [],
+        attrs: dict[str, str] = {},
     ):
         self.tag: str | None = tag
-        self.value: str | None = value
-        self.children: list[HTMLNode] | None = children
-        self.attrs: dict[str, str] | None = attrs
+        self.value: str = value
+        self.children: list[HTMLNode] = children
+        self.attrs: dict[str, str] = attrs
+
+    def add_child(self, child: HTMLNode):
+        self.children.append(child)
 
     def to_html(self) -> str:
-        raise NotImplementedError
+        children = "".join([child.to_html() for child in self.children])
+        return f"<{self.tag}{self.attrs_to_html()}>{self.value}{children}</{self.tag}>"
 
     def attrs_to_html(self) -> str:
         _attrs: str = ""
@@ -38,7 +42,7 @@ class ParentNode(HTMLNode):
     def __init__(
         self,
         tag: str | None,
-        children: list[HTMLNode] | None,
+        children: list[HTMLNode],
         attrs: dict[str, str] | None = None,
     ):
         if tag is None or tag == "":
@@ -48,6 +52,9 @@ class ParentNode(HTMLNode):
 
         super().__init__(tag, None, children, attrs)
 
+    def add_child(self, child: HTMLNode):
+        self.children.append(child)
+
     @override
     def to_html(self) -> str:
         if self.tag is None or self.tag == "":
@@ -56,7 +63,13 @@ class ParentNode(HTMLNode):
             raise ValueError("children from a parentnode cannot be None or empty")
 
         children = "".join([child.to_html() for child in self.children])
-        html = f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
+        html = ""
+        if self.tag == "code":
+            html = (
+                f"<pre><{self.tag}{self.attrs_to_html()}>{children}</{self.tag}></pre>"
+            )
+        else:
+            html = f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
 
         return html
 
@@ -81,4 +94,10 @@ class LeafNode(HTMLNode):
         if self.tag is None or self.tag == "":
             return self.value
 
-        return f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"
+        html = ""
+        if self.tag == "code":
+            html = f"<pre><{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}></pre>"
+        else:
+            html = f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"
+
+        return html

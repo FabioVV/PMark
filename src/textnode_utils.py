@@ -1,9 +1,7 @@
+from re import findall
+
 from textnode import TextNode, TextType
 from htmlnode import LeafNode
-from markdown_utils import (
-    extract_markdown_images,
-    extract_markdown_links,
-)
 
 
 DELIMITERS = {
@@ -11,10 +9,24 @@ DELIMITERS = {
     "_": TextType.UNDERLINE_TEXT,
     "`": TextType.CODE_TEXT,
 }
+MARKDOWN_IMAGES_REGEX = r"!\[(.*?)\]\((.*?)\)"
+MARKDOWN_LINKS_REGEX = r"\[(.*?)\]\((.*?)\)"
+
+
+def extract_markdown_images(md_text: str) -> list[tuple[str, str]]:
+    return findall(MARKDOWN_IMAGES_REGEX, md_text)
+
+
+def extract_markdown_links(md_text: str) -> list[tuple[str, str]]:
+    return findall(MARKDOWN_LINKS_REGEX, md_text)
 
 
 def make_text_node(text: str, text_type: TextType, url: str | None = None) -> TextNode:
     return TextNode(text, text_type, url)
+
+
+def text_nodes_to_children_nodes(nodes: list[TextNode]) -> list[LeafNode]:
+    return [text_node_to_html_node(node) for node in nodes]
 
 
 def text_node_to_html_node(txt_node: TextNode) -> LeafNode:

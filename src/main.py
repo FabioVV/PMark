@@ -15,8 +15,9 @@ This is another paragraph with _italic_ text and `code` here
 """
 
     node = markdown_to_html_node(md)
-    html = node.to_html()
-    print(html)
+
+    with open("test.html", "w") as file:
+        file.write(node.to_html())
 
 
 main()

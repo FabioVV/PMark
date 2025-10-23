@@ -1,11 +1,9 @@
 import unittest
 from markdown_utils import (
-    extract_markdown_images,
-    extract_markdown_links,
     markdown_to_blocks,
 )
 from markdown_blocks import block_to_block_type, BlockType
-# from textnode_utils import text_to_textnodes
+from textnode_utils import extract_markdown_images, extract_markdown_links
 
 
 class TestMarkdownUtils(unittest.TestCase):
