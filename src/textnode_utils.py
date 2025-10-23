@@ -1,6 +1,16 @@
 from textnode import TextNode, TextType
 from htmlnode import LeafNode
-from markdown_utils import extract_markdown_images, extract_markdown_links
+from markdown_utils import (
+    extract_markdown_images,
+    extract_markdown_links,
+)
+
+
+DELIMITERS = {
+    "**": TextType.BOLD_TEXT,
+    "_": TextType.UNDERLINE_TEXT,
+    "`": TextType.CODE_TEXT,
+}
 
 
 def make_text_node(text: str, text_type: TextType, url: str | None = None) -> TextNode:
@@ -43,8 +53,10 @@ def split_nodes_delimiter(
 
         text_node: TextNode | None = None
         splitted_str = i.text.split(delimiter)
+
         if len(splitted_str) == 1:
-            raise ValueError("Delimiter not found in text")
+            new_nodes.append(i)
+            continue
 
         start_del: int = i.text.find(delimiter)
         if (start_del) == -1:
@@ -78,10 +90,26 @@ def split_nodes_image(old_nodes: list[TextNode]) -> list[TextNode]:
             new_nodes.append(i)
             continue
 
-        links = extract_markdown_images(i.text)
-        new_nodes.extend(
-            [make_text_node(alt, TextType.LINK_TEXT, url) for alt, url in links]
-        )
+        images = extract_markdown_images(i.text)
+        if len(images) == 0:
+            new_nodes.append(i)
+            continue
+
+        old_text = i.text
+        for alt, url in images:
+            sections = old_text.split(f"![{alt}]({url})", 1)
+
+            if len(sections) != 2:
+                raise ValueError("Image section not closed")
+
+            if sections[0] != "":
+                new_nodes.append(make_text_node(sections[0], TextType.PLAIN_TEXT))
+
+            new_nodes.append(make_text_node(alt, TextType.IMAGE_TEXT, url))
+            old_text = sections[1]
+
+        if old_text != "":
+            new_nodes.append(make_text_node(old_text, TextType.PLAIN_TEXT))
 
     return new_nodes
 
@@ -90,13 +118,38 @@ def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
     new_nodes: list[TextNode] = []
 
     for i in old_nodes:
-        if i.text_type != TextType.PLAIN_TEXT:
+        if i.text_type != TextType.PLAIN_TEXT or i.text == "":
             new_nodes.append(i)
             continue
 
         links = extract_markdown_links(i.text)
-        new_nodes.extend(
-            [make_text_node(alt, TextType.LINK_TEXT, url) for alt, url in links]
-        )
+        if len(links) == 0:
+            new_nodes.append(i)
+            continue
+
+        old_text = i.text
+        for alt, url in links:
+            sections = old_text.split(f"[{alt}]({url})", 1)
+
+            if len(sections) != 2:
+                raise ValueError("Link section not closed")
+
+            if sections[0] != "":
+                new_nodes.append(make_text_node(sections[0], TextType.PLAIN_TEXT))
+
+            new_nodes.append(make_text_node(alt, TextType.LINK_TEXT, url))
+            old_text = sections[1]
+
+        if old_text != "":
+            new_nodes.append(make_text_node(old_text, TextType.PLAIN_TEXT))
 
     return new_nodes
+
+
+def text_to_textnodes(text: str) -> list[TextNode]:
+    nodes: list[TextNode] = [make_text_node(text, TextType.PLAIN_TEXT)]
+
+    for delimiter, delimiter_type in DELIMITERS.items():
+        nodes = split_nodes_delimiter(nodes, delimiter, delimiter_type)
+
+    return split_nodes_link(split_nodes_image(nodes))

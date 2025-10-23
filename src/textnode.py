@@ -34,6 +34,4 @@ class TextNode:
 
     @override
     def __repr__(self) -> str:
-        return (
-            f"text=({self.text})\n type=({self.text_type.value})\n url=({self.url})\n"
-        )
+        return f"TextNode({self.text}, {self.text_type.value}, {self.url})\n"
