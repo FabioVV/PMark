@@ -1,5 +1,11 @@
 import unittest
-from markdown_utils import extract_markdown_images, extract_markdown_links
+from markdown_utils import (
+    extract_markdown_images,
+    extract_markdown_links,
+    markdown_to_blocks,
+)
+from markdown_blocks import block_to_block_type, BlockType
+# from textnode_utils import text_to_textnodes
 
 
 class TestMarkdownUtils(unittest.TestCase):
@@ -16,3 +22,40 @@ class TestMarkdownUtils(unittest.TestCase):
         self.assertListEqual(
             [("link text", "https://i.imgur.com/zjjcJKZ.png")], matches
         )
+
+    def test_markdown_blocks(self):
+        md = """
+This is **bolded** paragraph
+
+This is another paragraph with _italic_ text and `code` here
+This is the same paragraph on a new line
+
+- This is a list
+- with items
+"""
+
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+                "This is **bolded** paragraph",
+                "This is another paragraph with _italic_ text and `code` here\nThis is the same paragraph on a new line",
+                "- This is a list\n- with items",
+            ],
+        )
+
+    def test_markdown_blocks_type(self):
+        md = """
+This is **bolded** paragraph
+
+This is another paragraph with _italic_ text and `code` here
+This is the same paragraph on a new line
+
+- This is a list
+- with items
+"""
+
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(block_to_block_type(blocks[0]), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(blocks[1]), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(blocks[2]), BlockType.UNORDERED_LIST)
