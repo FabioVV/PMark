@@ -10,11 +10,23 @@ from textnode_utils import (
 
 
 def markdown_to_blocks(md_text: str) -> list[str]:
+    """Converts the markdown text to a list of sections(blocks) with leading and trailing whitespace removed"""
     md_blocks = md_text.split("\n\n")
     return [block.strip() for block in md_blocks]
 
 
+def extract_markdown_title(md_text: str) -> str:
+    """Extracts the first level one header (# ...) it finds from the markdown text to be used as the page title.\n If no level one header is found, returns 'untitled'"""
+    text: list[str] = md_text.split("\n")
+    for line in text:
+        _line = line.strip()
+        if _line.startswith("#"):
+            return _line.lstrip("#").strip()
+    return "untitled"
+
+
 def markdown_to_html_node(md_text: str) -> HTMLNode:
+    """Converts markdown text to a single parent HTMLNode containing all the markdown as children nodes.\n The parent is a <div>."""
     blocks = markdown_to_blocks(md_text)
 
     html_node: HTMLNode = HTMLNode("div")
