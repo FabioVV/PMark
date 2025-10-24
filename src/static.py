@@ -1,6 +1,7 @@
 import os
 import logging
 import shutil
+# import sys
 
 
 def clean_dst(dst: str = "public") -> bool:
@@ -17,8 +18,12 @@ def clean_dst(dst: str = "public") -> bool:
                 file_path = os.path.join(path, file)
 
                 if os.path.isfile(file_path):
+                    logging.info(f"Deleting file {file_path}...")
+
                     os.unlink(file_path)
                 elif os.path.isdir(file_path):
+                    logging.info(f"Entering subfolder: {file_path} ...")
+
                     _ = recursive_delete(file_path)
 
             os.rmdir(path)
@@ -29,13 +34,16 @@ def clean_dst(dst: str = "public") -> bool:
 
     try:
         if os.path.exists(target) and os.path.isdir(target):
-            r = input(f"Confirm cleaning of the {target} directory? (y/n)")
+            r = input(
+                f"(If not confirmed, files will be generated anyway).\nConfirm cleaning of the {target} directory? (y/n)"
+            )
             if r.lower() == "y":
                 _ = recursive_delete(target)
                 logging.info(f"{dst} directory cleaned...")
             else:
                 logging.info("aborting...")
-                return False
+                # sys.exit(0)
+                return True
 
             # Recreate the directory, if necessary
             os.makedirs(target, exist_ok=True)

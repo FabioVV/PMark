@@ -1,7 +1,7 @@
 from re import findall
 
 from textnode import TextNode, TextType
-from htmlnode import LeafNode
+from htmlnode import LeafNode, HTMLNode
 
 
 DELIMITERS = {
@@ -33,6 +33,10 @@ def extract_markdown_title(md_text: str) -> str:
 
 def make_text_node(text: str, text_type: TextType, url: str | None = None) -> TextNode:
     return TextNode(text, text_type, url)
+
+
+def text_nodes_to_children_li_nodes(nodes: list[TextNode]) -> list[LeafNode]:
+    return [HTMLNode("li", "", [node]) for node in nodes]
 
 
 def text_nodes_to_children_nodes(nodes: list[TextNode]) -> list[LeafNode]:
@@ -168,10 +172,15 @@ def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
     return new_nodes
 
 
-def text_to_textnodes(text: str) -> list[TextNode]:
-    nodes: list[TextNode] = [make_text_node(text, TextType.PLAIN_TEXT)]
+def text_to_textnodes(text: str, test: bool = False) -> list[TextNode]:
+    nodes: list[TextNode] = [
+        make_text_node(txt, TextType.PLAIN_TEXT) for txt in text.split("\n")
+    ]
 
     for delimiter, delimiter_type in DELIMITERS.items():
         nodes = split_nodes_delimiter(nodes, delimiter, delimiter_type)
+
+    if test:
+        print(nodes)
 
     return split_nodes_link(split_nodes_image(nodes))

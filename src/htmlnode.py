@@ -40,7 +40,7 @@ class HTMLNode:
 
     @override
     def __repr__(self) -> str:
-        return f"tag = {self.tag}\n value = {self.value}\n, children = {self.children}\n, attrs = {self.attrs_to_html()}\n)"
+        return f"Node=({self.tag}, {self.value}, {self.children}, {self.attrs_to_html()})\n"
 
 
 class ParentNode(HTMLNode):

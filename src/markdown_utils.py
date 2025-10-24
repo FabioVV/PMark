@@ -3,6 +3,7 @@ from markdown_blocks import block_to_block_type, BlockType
 from textnode_utils import (
     text_to_textnodes,
     text_nodes_to_children_nodes,
+    text_nodes_to_children_li_nodes,
     text_node_to_html_node,
     make_text_node,
 )
@@ -31,29 +32,53 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
                 html_node.add_child(HTMLNode("p", "", children))
 
             case BlockType.CODE:
+                if block.startswith("```") and block.endswith(
+                    "```"
+                ):  # FIXME: this can be done more elegantly
+                    block = block[3 : len(block) - 3].strip()
+
                 text_node = make_text_node(block, TextType.CODE_TEXT)
                 children = text_node_to_html_node(text_node)
                 html_node.add_child(HTMLNode("code", "", [children]))
 
             case BlockType.QUOTE:
+                block = "".join(
+                    [line.lstrip(">").strip() for line in block.split("\n")]
+                )
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
                 html_node.add_child(HTMLNode("blockquote", "", children))
 
             case BlockType.HEADING:
                 heading_level = len(block) - len(block.lstrip("#"))
-                text_node = text_to_textnodes(block)
+                text_node = text_to_textnodes(block.lstrip("#").strip())
                 children = text_nodes_to_children_nodes(text_node)
                 html_node.add_child(HTMLNode(f"h{heading_level}", "", children))
 
             case BlockType.ORDERED_LIST:
+                block = "".join(
+                    [
+                        line.lstrip(f"{idx + 1}. ").strip() + "\n"
+                        for idx, line in enumerate(block.split("\n"))
+                    ]
+                )
+
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
-                html_node.add_child(HTMLNode("ol", "", children))
+                li_children = text_nodes_to_children_li_nodes(children)
+
+                html_node.add_child(HTMLNode("ol", "", li_children))
 
             case BlockType.UNORDERED_LIST:
+                block = "".join([line.lstrip("-") + "\n" for line in block.split("\n")])
+
                 text_node = text_to_textnodes(block)
+                print(text_node)
                 children = text_nodes_to_children_nodes(text_node)
-                html_node.add_child(HTMLNode("ul", "", children))
+                print(children)
+
+                li_children = text_nodes_to_children_li_nodes(children)
+
+                html_node.add_child(HTMLNode("ul", "", li_children))
 
     return html_node
