@@ -3,10 +3,24 @@ from markdown_utils import (
     markdown_to_blocks,
 )
 from markdown_blocks import block_to_block_type, BlockType
-from textnode_utils import extract_markdown_images, extract_markdown_links
+from textnode_utils import (
+    extract_markdown_images,
+    extract_markdown_links,
+    extract_markdown_title,
+)
 
 
 class TestMarkdownUtils(unittest.TestCase):
+    def test_extract_markdown_title(self):
+        matches = extract_markdown_title(
+            """
+             # Title bruh
+             - Wow, this is some markdown!
+             # hmmmm this is not the title!
+            """
+        )
+        self.assertEqual("Title bruh", matches)
+
     def test_extract_markdown_images(self):
         matches = extract_markdown_images(
             "This is text with an ![img text](https://i.imgur.com/zjjcJKZ.png)"

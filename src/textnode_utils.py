@@ -21,6 +21,16 @@ def extract_markdown_links(md_text: str) -> list[tuple[str, str]]:
     return findall(MARKDOWN_LINKS_REGEX, md_text)
 
 
+def extract_markdown_title(md_text: str) -> str:
+    """Extracts the first level one header (# ...) it finds from the markdown text to be used as the page title.\n If no level one header is found, returns 'untitled'"""
+    text: list[str] = md_text.split("\n")
+    for line in text:
+        _line = line.strip()
+        if _line.startswith("#"):
+            return _line.lstrip("#").strip()
+    return "untitled"
+
+
 def make_text_node(text: str, text_type: TextType, url: str | None = None) -> TextNode:
     return TextNode(text, text_type, url)
 

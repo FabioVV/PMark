@@ -1,28 +1,18 @@
-from htmlnode import HTMLNode, ParentNode
+from htmlnode import HTMLNode  # , ParentNode
 from markdown_blocks import block_to_block_type, BlockType
 from textnode_utils import (
     text_to_textnodes,
     text_nodes_to_children_nodes,
     text_node_to_html_node,
     make_text_node,
-    TextType,
 )
+from textnode import TextType
 
 
 def markdown_to_blocks(md_text: str) -> list[str]:
     """Converts the markdown text to a list of sections(blocks) with leading and trailing whitespace removed"""
     md_blocks = md_text.split("\n\n")
     return [block.strip() for block in md_blocks]
-
-
-def extract_markdown_title(md_text: str) -> str:
-    """Extracts the first level one header (# ...) it finds from the markdown text to be used as the page title.\n If no level one header is found, returns 'untitled'"""
-    text: list[str] = md_text.split("\n")
-    for line in text:
-        _line = line.strip()
-        if _line.startswith("#"):
-            return _line.lstrip("#").strip()
-    return "untitled"
 
 
 def markdown_to_html_node(md_text: str) -> HTMLNode:
