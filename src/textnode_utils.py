@@ -34,13 +34,13 @@ def text_node_to_html_node(txt_node: TextNode) -> LeafNode:
         case TextType.PLAIN_TEXT:
             return LeafNode(None, txt_node.text)
         case TextType.BOLD_TEXT:
-            return LeafNode("b", txt_node.text)
+            return LeafNode("strong", txt_node.text)
         case TextType.ITALIC_TEXT:
-            return LeafNode("i", txt_node.text)
+            return LeafNode("em", txt_node.text)
         case TextType.UNDERLINE_TEXT:
             return LeafNode("u", txt_node.text)
         case TextType.STRIKETHROUGH_TEXT:
-            return LeafNode("s", txt_node.text)
+            return LeafNode("del", txt_node.text)
         case TextType.CODE_TEXT:
             return LeafNode("code", txt_node.text)
         case TextType.LINK_TEXT:

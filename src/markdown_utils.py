@@ -26,38 +26,32 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
             case BlockType.PARAGRAPH:
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
-                node: HTMLNode = HTMLNode("p", "", children)
-                html_node.add_child(node)
+                html_node.add_child(HTMLNode("p", "", children))
 
             case BlockType.CODE:
-                text_node = make_text_node(text_node.text, TextType.CODE_TEXT)
+                text_node = make_text_node(block, TextType.CODE_TEXT)
                 children = text_node_to_html_node(text_node)
-                node: HTMLNode = HTMLNode("code", "", [children])
-                html_node.add_child(node)
+                html_node.add_child(HTMLNode("code", "", [children]))
 
             case BlockType.QUOTE:
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
-                node: HTMLNode = HTMLNode("blockquote", "", children)
-                html_node.add_child(node)
+                html_node.add_child(HTMLNode("blockquote", "", children))
 
             case BlockType.HEADING:
                 heading_level = len(block) - len(block.lstrip("#"))
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
-                node: HTMLNode = HTMLNode(f"h{heading_level}", "", children)
-                html_node.add_child(node)
+                html_node.add_child(HTMLNode(f"h{heading_level}", "", children))
 
             case BlockType.ORDERED_LIST:
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
-                node: HTMLNode = HTMLNode("ol", "", children)
-                html_node.add_child(node)
+                html_node.add_child(HTMLNode("ol", "", children))
 
             case BlockType.UNORDERED_LIST:
                 text_node = text_to_textnodes(block)
                 children = text_nodes_to_children_nodes(text_node)
-                node: HTMLNode = HTMLNode("ul", "", children)
-                html_node.add_child(node)
+                html_node.add_child(HTMLNode("ul", "", children))
 
     return html_node

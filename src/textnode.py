@@ -20,7 +20,7 @@ class TextNode:
         self.url: str | None = url
 
     @override
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         if not isinstance(other, TextNode):
             return False
 

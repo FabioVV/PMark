@@ -9,19 +9,24 @@ class HTMLNode:
         self,
         tag: str | None = None,
         value: str = "",
-        children: list[HTMLNode] = [],
-        attrs: dict[str, str] = {},
+        children: list[HTMLNode] | None = None,
+        attrs: dict[str, str] | None = None,
     ):
         self.tag: str | None = tag
         self.value: str = value
-        self.children: list[HTMLNode] = children
-        self.attrs: dict[str, str] = attrs
+        self.children: list[HTMLNode] | None = children
+        self.attrs: dict[str, str] | None = attrs
 
     def add_child(self, child: HTMLNode):
+        if self.children is None:
+            self.children = []
         self.children.append(child)
 
     def to_html(self) -> str:
-        children = "".join([child.to_html() for child in self.children])
+        children = "".join([child.to_html() for child in (self.children or [])])
+        if children == "" and self.value == "":
+            return ""
+
         return f"<{self.tag}{self.attrs_to_html()}>{self.value}{children}</{self.tag}>"
 
     def attrs_to_html(self) -> str:
@@ -42,27 +47,30 @@ class ParentNode(HTMLNode):
     def __init__(
         self,
         tag: str | None,
-        children: list[HTMLNode],
+        children: list[HTMLNode] | None = None,
         attrs: dict[str, str] | None = None,
     ):
         if tag is None or tag == "":
             raise ValueError("HTML tag from a parentnode cannot be None or empty")
-        if children is None or children == []:
+        if children == [] or children is None:
             raise ValueError("children from a parentnode cannot be None or empty")
 
-        super().__init__(tag, None, children, attrs)
+        super().__init__(tag, "", children, attrs)
 
+    @override
     def add_child(self, child: HTMLNode):
+        if self.children is None:
+            self.children: list[HTMLNode] | None = []
         self.children.append(child)
 
     @override
     def to_html(self) -> str:
         if self.tag is None or self.tag == "":
             raise ValueError("HTML tag from a parentnode cannot be None or empty")
-        if self.children is None or self.children == []:
+        if self.children == []:
             raise ValueError("children from a parentnode cannot be None or empty")
 
-        children = "".join([child.to_html() for child in self.children])
+        children = "".join([child.to_html() for child in (self.children or [])])
         html = ""
         if self.tag == "code":
             html = (
@@ -78,19 +86,13 @@ class LeafNode(HTMLNode):
     def __init__(
         self,
         tag: str | None = None,
-        value: str | None = None,
+        value: str = "",
         attrs: dict[str, str] | None = None,
     ):
-        if value is None:
-            raise ValueError("LeafNode value cannot be None")
-
-        super().__init__(tag, value, None, attrs)
+        super().__init__(tag, value, [], attrs)
 
     @override
     def to_html(self) -> str:
-        if self.value is None:
-            raise ValueError("LeafNode value cannot be None")
-
         if self.tag is None or self.tag == "":
             return self.value
 
