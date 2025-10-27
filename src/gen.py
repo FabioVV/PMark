@@ -7,7 +7,7 @@ from textnode_utils import extract_markdown_title
 
 def generate_page_from_path_md(
     template: str = "template.html", src: str = "", dst: str = "public"
-) -> str:
+) -> bool:
     """Generates a single HTML page from a given markdown file using a base template.\n
     In the case that the destination directory path does not exists, it tries to create it\n
     Returns the path of the generated page, or an empty string in the case of a silent failure

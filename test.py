@@ -6,7 +6,7 @@ try:
     args = []  # FIXME: maybe let the user pass in some args
 
     result = subprocess.run(
-        [sys.executable, "-m", "unittest", "discover", "-s", "src"] + args
+        [sys.executable, "-m", "unittest", "discover", "-s", "tests"] + args
     )
     if result.returncode != 0:
         print("Error: subprocess returned non-zero exit code")

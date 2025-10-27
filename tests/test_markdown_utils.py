@@ -1,9 +1,9 @@
 import unittest
-from markdown_utils import (
+from src.markdown_utils import (
     markdown_to_blocks,
 )
-from markdown_blocks import block_to_block_type, BlockType
-from textnode_utils import (
+from src.markdown_blocks import block_to_block_type, BlockType
+from src.textnode_utils import (
     extract_markdown_images,
     extract_markdown_links,
     extract_markdown_title,
