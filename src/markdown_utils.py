@@ -1,13 +1,13 @@
-from .htmlnode import HTMLNode  # , ParentNode
-from .markdown_blocks import block_to_block_type, block_to_unordered_list, BlockType
-from .textnode_utils import (
+from htmlnode import HTMLNode  # , ParentNode
+from markdown_blocks import block_to_block_type, block_to_unordered_list, BlockType
+from textnode_utils import (
     text_to_textnodes,
     text_nodes_to_children_nodes,
     text_nodes_to_children_li_nodes,
     text_node_to_html_node,
     make_text_node,
 )
-from .textnode import TextType
+from textnode import TextType
 
 
 def markdown_to_blocks(md_text: str) -> list[str]:

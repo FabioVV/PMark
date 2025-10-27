@@ -95,8 +95,15 @@ def setup_static_files(src: str = "static", dst: str = "public") -> bool:
                     _ = shutil.copy2(file_path, dst)
 
                 elif os.path.isdir(file_path):
+                    subfolder_path: str = os.path.join(dst, os.path.basename(file_path))
                     logging.info(f"Entering subfolder: {file_path} ...")
-                    _ = setup_static_files_recursive(file_path, dst)
+                    logging.info(f"Creating subfolder: {subfolder_path} ...")
+
+                    os.makedirs(
+                        subfolder_path, exist_ok=True
+                    )  # create the folder at dst
+
+                    _ = setup_static_files_recursive(file_path, subfolder_path)
 
         except Exception as e:
             logging.error(f"Error copying static files from {src} to {dst}: {e}")

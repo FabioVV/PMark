@@ -1,7 +1,7 @@
 from re import findall
 
-from .textnode import TextNode, TextType
-from .htmlnode import LeafNode, HTMLNode
+from textnode import TextNode, TextType
+from htmlnode import LeafNode, HTMLNode
 
 
 DELIMITERS = {
