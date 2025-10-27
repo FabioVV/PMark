@@ -1,4 +1,6 @@
 from enum import Enum
+from htmlnode import LeafNode, HTMLNode
+from textnode_utils import text_to_textnodes, text_nodes_to_children_nodes
 
 
 class BlockType(Enum):
@@ -8,6 +10,16 @@ class BlockType(Enum):
     UNORDERED_LIST = "unordered_list"
     CODE = "code"
     QUOTE = "quote"
+
+
+def block_to_unordered_list(blocks: list[str]) -> list[HTMLNode]:
+    li_nodes: list[HTMLNode] = []
+    for li_block in blocks:
+        nodes = text_to_textnodes(li_block)
+        leaf_nodes = text_nodes_to_children_nodes(nodes)
+        li_nodes.append(HTMLNode("li", "", leaf_nodes, None))
+
+    return li_nodes
 
 
 def block_to_block_type(md_text: str) -> BlockType:

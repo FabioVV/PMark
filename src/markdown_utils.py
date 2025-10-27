@@ -1,5 +1,5 @@
 from htmlnode import HTMLNode  # , ParentNode
-from markdown_blocks import block_to_block_type, BlockType
+from markdown_blocks import block_to_block_type, block_to_unordered_list, BlockType
 from textnode_utils import (
     text_to_textnodes,
     text_nodes_to_children_nodes,
@@ -70,15 +70,10 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
                 html_node.add_child(HTMLNode("ol", "", li_children))
 
             case BlockType.UNORDERED_LIST:
-                block = "".join([line.lstrip("-") + "\n" for line in block.split("\n")])
+                block = [line.lstrip("-") + "\n" for line in block.split("\n")]
 
-                text_node = text_to_textnodes(block)
-                print(text_node)
-                children = text_nodes_to_children_nodes(text_node)
-                print(children)
+                li_nodes: list[HTMLNode] = block_to_unordered_list(block)
 
-                li_children = text_nodes_to_children_li_nodes(children)
-
-                html_node.add_child(HTMLNode("ul", "", li_children))
+                html_node.add_child(HTMLNode("ul", "", li_nodes))
 
     return html_node
