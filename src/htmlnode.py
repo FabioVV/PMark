@@ -71,14 +71,8 @@ class ParentNode(HTMLNode):
             raise ValueError("children from a parentnode cannot be None or empty")
 
         children = "".join([child.to_html() for child in (self.children or [])])
-        html = ""
-        if self.tag == "code":
-            html = (
-                f"<pre><{self.tag}{self.attrs_to_html()}>{children}</{self.tag}></pre>"
-            )
-        else:
-            html = f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
 
+        html = f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
         return html
 
 
@@ -96,10 +90,5 @@ class LeafNode(HTMLNode):
         if self.tag is None or self.tag == "":
             return self.value
 
-        html = ""
-        if self.tag == "code":
-            html = f"<pre><{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}></pre>"
-        else:
-            html = f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"
-
+        html = f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"
         return html

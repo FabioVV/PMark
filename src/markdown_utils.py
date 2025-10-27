@@ -21,10 +21,8 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
     blocks = markdown_to_blocks(md_text)
 
     html_node: HTMLNode = HTMLNode("div")
-
     for block in blocks:
         btype = block_to_block_type(block)
-
         match btype:
             case BlockType.PARAGRAPH:
                 text_node = text_to_textnodes(block)
@@ -39,7 +37,10 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
 
                 text_node = make_text_node(block, TextType.CODE_TEXT)
                 children = text_node_to_html_node(text_node)
-                html_node.add_child(HTMLNode("code", "", [children]))
+
+                html_node.add_child(
+                    HTMLNode("pre", "", [HTMLNode("code", "", [children])])
+                )
 
             case BlockType.QUOTE:
                 block = "".join(

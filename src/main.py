@@ -15,16 +15,15 @@ logging.basicConfig(
 
 
 def main():
+    file_to_generate = os.path.join("content", "index.md")
+
     if not clean_dst():
         sys.exit(1)
 
     if not setup_static_files():
         sys.exit(1)
 
-    file_to_generate = os.path.join("content", "index.md")
-    generated = generate_page_from_path_md(src=file_to_generate)
-
-    if not generated:
+    if not generate_page_from_path_md(src=file_to_generate):
         logging.error(f"Failed to generate file {file_to_generate}")
         sys.exit(1)
 
