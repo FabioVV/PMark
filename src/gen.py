@@ -1,8 +1,8 @@
 import os
 import logging
-from fileop import read_from_file, write_to_file
-from markdown_utils import markdown_to_html_node
-from textnode_utils import extract_markdown_title
+from src.fileop import read_from_file, write_to_file
+from src.markdown_utils import markdown_to_html_node
+from src.textnode_utils import extract_markdown_title
 
 
 def generate_page_from_path_md(

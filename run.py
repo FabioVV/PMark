@@ -3,22 +3,20 @@ import os
 import sys
 import subprocess
 
-target = os.path.join(os.getcwd(), "src", "main.py")
+target = os.path.join(os.getcwd())
 
+try:
+    args_cmd = sys.argv[1:]
 
-if os.path.exists(target):
-    try:
-        args_cmd = sys.argv[1:]
+    if len(sys.argv) <= 1:
+        args_cmd = []
 
-        if len(sys.argv) <= 1:
-            args_cmd = []
+    result = subprocess.run([sys.executable, "-m", "src.main"] + args_cmd)
+    if result.returncode != 0:
+        print("Error: subprocess returned non-zero exit code")
+        print(result)
+        sys.exit(result.returncode)
 
-        result = subprocess.run([sys.executable, target] + args_cmd)
-        if result.returncode != 0:
-            print("Error: subprocess returned non-zero exit code")
-            print(result)
-            sys.exit(result.returncode)
-
-    except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+except Exception as e:
+    print(f"Error: {e}")
+    sys.exit(1)

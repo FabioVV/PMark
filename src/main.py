@@ -1,8 +1,8 @@
 import logging
 import sys
 import os
-from static import clean_dst, setup_static_files
-from gen import generate_page_from_path_md
+from src.static import clean_dst, setup_static_files
+from src.gen import generate_page_from_path_md
 
 logging.basicConfig(
     level=logging.INFO,
@@ -21,7 +21,12 @@ def main():
     if not setup_static_files():
         sys.exit(1)
 
-    generate_page_from_path_md(src=os.path.join("content", "index.md"))
+    file_to_generate = os.path.join("content", "index.md")
+    generated = generate_page_from_path_md(src=file_to_generate)
+
+    if not generated:
+        logging.error(f"Failed to generate file {file_to_generate}")
+        sys.exit(1)
 
 
 main()
