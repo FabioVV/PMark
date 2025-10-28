@@ -5,7 +5,7 @@ from functools import partial
 
 
 def run_server(
-    dir_to_serve_from: str = "public",
+    dir_to_serve_from: str = "docs",
     port: int = 8001,
 ):
     try:

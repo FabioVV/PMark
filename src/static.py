@@ -4,7 +4,7 @@ import shutil
 # import sys
 
 
-def clean_dst(dst: str = "public") -> bool:
+def clean_dst(dst: str = "docs") -> bool:
     """
     Deletes all content inside of the destination folder to ensure that the site generation is clean.\n
     WARNING: You can pass in any filesystem path, and if it can, this function will delete everything inside.\n
@@ -60,7 +60,7 @@ def clean_dst(dst: str = "public") -> bool:
         return False
 
 
-def setup_static_files(src: str = "static", dst: str = "public") -> bool:
+def setup_static_files(src: str = "static", dst: str = "docs") -> bool:
     """
     If no args are given, Copies the static files provided in the /static folder at the root of the project to the /public folder.\n
     If more flexibility is needed, source and destiny paths can be passed to control from where the static files will be copied to where.

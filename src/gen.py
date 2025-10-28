@@ -1,4 +1,3 @@
-from operator import ge
 import os
 import logging
 from src.fileop import read_from_file, write_to_file
@@ -7,7 +6,10 @@ from src.textnode_utils import extract_markdown_title
 
 
 def generate_pages_from_path_md(
-    template: str = "template.html", src: str = "", dst: str = "public"
+    template: str = "template.html",
+    src: str = "",
+    dst: str = "docs",
+    basepath: str = "/",
 ) -> bool:
     """Generates HTML pages from the markdown files present at the src preserving the directory structure while a base template.\n
     In the case that the destination directory path does not exists, it tries to create it\n
@@ -52,6 +54,8 @@ def generate_pages_from_path_md(
 
                     gen_page = gen_page.replace("{{ Title }}", markdown_page_title)
                     gen_page = gen_page.replace("{{ Content }}", generated_html)
+                    gen_page = gen_page.replace('href="/', f'href="{basepath}')
+                    gen_page = gen_page.replace('src="/', f'href="{basepath}')
 
                     write_to_file(filepath_to_create, gen_page)
 
@@ -77,7 +81,7 @@ def generate_pages_from_path_md(
 
 
 def generate_page_from_path_md(
-    template: str = "template.html", src: str = "", dst: str = "public"
+    template: str = "template.html", src: str = "", dst: str = "docs"
 ) -> bool:
     """Generates a single HTML page from a given markdown file using a base template.\n
     In the case that the destination directory path does not exists, it tries to create it\n
