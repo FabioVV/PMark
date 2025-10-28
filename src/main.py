@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 from src.static import clean_dst, setup_static_files
-from src.gen import generate_page_from_path_md
+from src.gen import generate_page_from_path_md, generate_pages_from_path_md
 from src.server import run_server
 
 logging.basicConfig(
@@ -16,7 +16,7 @@ logging.basicConfig(
 
 
 def main():
-    file_to_generate = os.path.join("content", "index.md")
+    dir_to_generate_from = os.path.join("content")
 
     if not clean_dst():
         sys.exit(1)
@@ -24,11 +24,11 @@ def main():
     if not setup_static_files():
         sys.exit(1)
 
-    if not generate_page_from_path_md(src=file_to_generate):
-        logging.error(f"Failed to generate file {file_to_generate}")
+    if not generate_pages_from_path_md(src=dir_to_generate_from):
+        logging.error(f"Failed to generate files from directory {dir_to_generate_from}")
         sys.exit(1)
 
-    logging.info("\nInitializing server...")
+    logging.info("\n\nInitializing server...")
     run_server()
 
 
