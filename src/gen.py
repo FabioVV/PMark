@@ -64,7 +64,7 @@ def generate_pages_from_path_md(
                         subfolder_path, exist_ok=True
                     )  # create the folder at dst
 
-                    generate_pages_from_path_md_recursive(
+                    _ = generate_pages_from_path_md_recursive(
                         template, file_path, subfolder_path
                     )
 
@@ -72,7 +72,7 @@ def generate_pages_from_path_md(
             logging.error(f"Error generating pages from directory {src}: {e}")
             return False
 
-    generate_pages_from_path_md_recursive(template, target_from, target_to)
+    _ = generate_pages_from_path_md_recursive(template, target_from, target_to)
     return True
 
 

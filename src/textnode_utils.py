@@ -79,6 +79,8 @@ def split_nodes_delimiter(
 
         text_node: TextNode | None = None
         splitted_str = i.text.split(delimiter)
+        # if delimiter == "`":
+        #     print(splitted_str)
 
         if len(splitted_str) == 1:
             new_nodes.append(i)

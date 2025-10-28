@@ -12,7 +12,7 @@ class BlockType(Enum):
     QUOTE = "quote"
 
 
-def block_to_unordered_list(blocks: list[str]) -> list[HTMLNode]:
+def block_to_li_list(blocks: list[str]) -> list[HTMLNode]:
     li_nodes: list[HTMLNode] = []
     for li_block in blocks:
         nodes = text_to_textnodes(li_block)

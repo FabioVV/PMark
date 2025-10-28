@@ -6,7 +6,7 @@ from functools import partial
 
 def run_server(
     dir_to_serve_from: str = "public",
-    port: int = 8000,
+    port: int = 8001,
 ):
     try:
         target_to = os.path.abspath(os.path.expanduser(dir_to_serve_from))

@@ -1,5 +1,5 @@
 from src.htmlnode import HTMLNode  # , ParentNode
-from src.markdown_blocks import block_to_block_type, block_to_unordered_list, BlockType
+from src.markdown_blocks import block_to_block_type, block_to_li_list, BlockType
 from src.textnode_utils import (
     text_to_textnodes,
     text_nodes_to_children_nodes,
@@ -23,6 +23,7 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
     html_node: HTMLNode = HTMLNode("div")
     for block in blocks:
         btype = block_to_block_type(block)
+
         match btype:
             case BlockType.PARAGRAPH:
                 text_node = text_to_textnodes(block)
@@ -57,22 +58,17 @@ def markdown_to_html_node(md_text: str) -> HTMLNode:
                 html_node.add_child(HTMLNode(f"h{heading_level}", "", children))
 
             case BlockType.ORDERED_LIST:
-                block = "".join(
-                    [
-                        line.lstrip(f"{idx + 1}. ").strip() + "\n"
-                        for idx, line in enumerate(block.split("\n"))
-                    ]
-                )
+                block = [
+                    line.lstrip(f"{idx + 1}. ").strip() + "\n"
+                    for idx, line in enumerate(block.split("\n"))
+                ]
+                li_nodes: list[HTMLNode] = block_to_li_list(block)
 
-                text_node = text_to_textnodes(block)
-                children = text_nodes_to_children_nodes(text_node)
-                li_children = text_nodes_to_children_li_nodes(children)
-
-                html_node.add_child(HTMLNode("ol", "", li_children))
+                html_node.add_child(HTMLNode("ol", "", li_nodes))
 
             case BlockType.UNORDERED_LIST:
                 block = [line.lstrip("-") + "\n" for line in block.split("\n")]
-                li_nodes: list[HTMLNode] = block_to_unordered_list(block)
+                li_nodes: list[HTMLNode] = block_to_li_list(block)
 
                 html_node.add_child(HTMLNode("ul", "", li_nodes))
 
