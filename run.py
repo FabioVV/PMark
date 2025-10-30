@@ -11,7 +11,8 @@ try:
     if len(sys.argv) <= 1:
         args_cmd = []
 
-    result = subprocess.run([sys.executable, "-m", "src.main"] + args_cmd)
+    command = [sys.executable, "-m", "src.main"] + args_cmd
+    result = subprocess.run(command)
     if result.returncode != 0:
         print("Error: subprocess returned non-zero exit code")
         print(result)
