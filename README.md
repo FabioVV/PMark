@@ -9,14 +9,16 @@ I use it to generate my stuff, but if you find it useful, feel free to contribut
   - Python 3.11+
 
 ## Usage
-  - To run, simply clone the project and inside the cloned folder type in the following: `python run.py` or `python3 run.py`. Then in the browser you should be able to access localhost:8001, which is where the files will be served for visualization
+  - To run, simply clone the project and inside the cloned folder type in the following:
+  -  `python run.py` or `python3 run.py`.
+  - Then in the browser you should be able to access localhost:8001, which is where the files will be served for visualization
   - There should be a `static` and `content` directories inside of the cloned folder. If they are not there, make them
   - Inside of the static folder you should keep all of your static files like scripts, images and CSS. Follow this simple folder structure for correct generation:
     - static/
       - img/
       - css/
       - js/
-  - Inside of the content folder is where you are goind to write you markdown, the directory structure you create here will be mantained after the HTML generation
+  - Inside of the content folder is where you are going to write you markdown, the directory structure you create here will be the same in the generated HTML content
   - If after running the program everything goes well, you should see a docs/ directory inside of you CWD, all of the generated HTML will be in there
 
 ## Testing
