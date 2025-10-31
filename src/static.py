@@ -34,9 +34,10 @@ def clean_dst(dst: str = "docs") -> bool:
 
     try:
         if os.path.exists(target) and os.path.isdir(target):
-            r = input(
-                f"(If not confirmed, files will be generated anyway).\nConfirm cleaning of the {target} directory? (y/n)"
-            )
+            # r = input(
+            #     f"(If not confirmed, files will be generated anyway).\nConfirm cleaning of the {target} directory? (y/n)"
+            # )
+            r = "y"
             if r.lower() == "y":
                 _ = recursive_delete(target)
                 logging.info(f"{dst} directory cleaned...")

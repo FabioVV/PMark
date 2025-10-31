@@ -29,19 +29,6 @@ def main():
     dir_to_generate_from = os.path.join("content")
     commands = [sys.executable, "-m", "src.main"] + args_cmd
 
-    warden = Warden(dir_to_generate_from)
-    if warden.save_dir_state():
-        changes = warden.monitor()
-
-        for has_changes in changes:
-            if has_changes:
-                result = subprocess.run(commands)  # rebuild project
-
-                if result.returncode != 0:
-                    print("Error: subprocess returned non-zero exit code")
-                    print(result)
-                    sys.exit(result.returncode)
-
     if not clean_dst():
         sys.exit(1)
 
@@ -54,8 +41,21 @@ def main():
         logging.error(f"Failed to generate files from directory {dir_to_generate_from}")
         sys.exit(1)
 
-    logging.info("\n\nInitializing server...")
-    run_server("docs", 8001)
+    warden = Warden(dir_to_generate_from)
+    if warden.save_dir_state():
+        logging.info("\n\nInitializing server...")
+        run_server("docs", 8001)
 
+        changes = warden.monitor()
 
+        for has_changes in changes:
+            if has_changes:
+                result = subprocess.run(commands)  # rebuild project
+
+                if result.returncode != 0:
+                    print("Error: subprocess returned non-zero exit code")
+                    print(result)
+                    sys.exit(result.returncode)
+
+                
 main()
