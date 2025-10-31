@@ -27,7 +27,11 @@ class HTMLNode:
         if children == "" and self.value == "":
             return ""
 
-        return f"<{self.tag}{self.attrs_to_html()}>{self.value}{children}</{self.tag}>"
+        match self.tag:
+            case "img":
+                return f"<{self.tag}{self.attrs_to_html()}/>{self.value}{children}"
+            case _:
+                return f"<{self.tag}{self.attrs_to_html()}>{self.value}{children}</{self.tag}>"
 
     def attrs_to_html(self) -> str:
         _attrs: str = ""
@@ -72,8 +76,11 @@ class ParentNode(HTMLNode):
 
         children = "".join([child.to_html() for child in (self.children or [])])
 
-        html = f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
-        return html
+        match self.tag:
+            case "img":
+                return f"<{self.tag}{self.attrs_to_html()}/>{children}"
+            case _:
+                return f"<{self.tag}{self.attrs_to_html()}>{children}</{self.tag}>"
 
 
 class LeafNode(HTMLNode):
@@ -90,5 +97,8 @@ class LeafNode(HTMLNode):
         if self.tag is None or self.tag == "":
             return self.value
 
-        html = f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"
-        return html
+        match self.tag:
+            case "img":
+                return f"<{self.tag}{self.attrs_to_html()}/>{self.value}"
+            case _:
+                return f"<{self.tag}{self.attrs_to_html()}>{self.value}</{self.tag}>"

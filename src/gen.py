@@ -52,7 +52,6 @@ def generate_pages_from_path_md(
                     generated_html = markdown_to_html_node(src_md_content).to_html()
                     markdown_page_title = extract_markdown_title(src_md_content)
 
-                    print(basepath)
                     gen_page = gen_page.replace("{{ Title }}", markdown_page_title)
                     gen_page = gen_page.replace("{{ Content }}", generated_html)
                     gen_page = gen_page.replace('href="/', f'href="{basepath}')
