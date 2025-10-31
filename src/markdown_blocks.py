@@ -1,5 +1,5 @@
 from enum import Enum
-from src.htmlnode import LeafNode, HTMLNode
+from src.htmlnode import HTMLNode
 from src.textnode_utils import text_to_textnodes, text_nodes_to_children_nodes
 
 

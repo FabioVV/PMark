@@ -3,7 +3,6 @@ from src.markdown_blocks import block_to_block_type, block_to_li_list, BlockType
 from src.textnode_utils import (
     text_to_textnodes,
     text_nodes_to_children_nodes,
-    text_nodes_to_children_li_nodes,
     text_node_to_html_node,
     make_text_node,
 )

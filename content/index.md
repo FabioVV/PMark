@@ -1,16 +1,18 @@
 - [Home](/index.html)
-- [About](/about/index.html)
 - [Projects](/projects/index.html)
 - [Contact](#contact)
 - [Resume](#resume)
 
-# Fábio Varela
+# Hi! My name is Fábio Varela, I am a Software Developer
 
-### Software Developer
+##### Dedicated to the art and science of computers and programming
 
 ![A Photo of Fabio](/images/itsmefabio.jpg)
 
-_Most_ of this site was generate by my very own [static site generator](#repohere)
+I am a software developer with more than 4 years of experience, recognized for my versatility, ability to adapt quickly to new technologies, and calm approach to problems.
 
-- [Linkedin](/index.md)
-- [GitHub](/about/index.md)
+
+_Most_ of this site was generated from markdown files by my very own [static site generator](#repohere) written in python
+
+- [Linkedin](www.linkedin.com/in/fabio-varela-413719217)
+- [GitHub](https://github.com/fabioVV)

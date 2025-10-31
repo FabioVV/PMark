@@ -1,6 +1,12 @@
+:root {
+    --bg-color: #000;
+    --text-color: #ffffff;
+    --title-color: #49c5b6;
+}
+
 body {
-    background-color: #1f1c25;
-    color: #f0e6d1;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family:
         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
         Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -22,7 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #dda15e;
+    color: var(--title-color);
     margin-top: 24px;
     margin-bottom: 16px;
     text-shadow: 2px 2px 4px #000;
@@ -47,7 +53,7 @@ h6 {
 }
 
 a {
-    color: #e0a96d;
+    color: var(--text-color);
     text-decoration: none;
     border-bottom: 2px solid #e0a96d;
 }
