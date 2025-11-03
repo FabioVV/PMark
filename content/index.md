@@ -1,3 +1,4 @@
+- ![A small Photo of Fabio](/images/itsmefabio.jpg) Fábio
 - [Home](/index.html)
 - [Projects](/projects/index.html)
 - [Blog](/blog/index.html)
@@ -10,7 +11,7 @@
 
 ![A Photo of Fabio](/images/itsmefabio.jpg)
 
-I am a software developer with more than 4 years of experience, recognized for my versatility, ability to adapt quickly to new technologies, and calm approach to solving problems.
+I am a software developer with little more than 3 years of experience, recognized for my versatility, ability to adapt quickly to new technologies, and calm approach to solving problems.
 
 ## My Tools
 
@@ -26,7 +27,7 @@ I am a software developer with more than 4 years of experience, recognized for m
 
 - Echo
 - Django
-- React (Library?)
+- React
 - Ruby on Rails
 - Flask
 - Angular
