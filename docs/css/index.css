@@ -2,7 +2,7 @@
     --bg-color: #141413;
     --text-color: #afaca1;
     --title-color: #c9c8bf;
-    --contrast-color: #bdbbb2;
+    --contrast-color: #b89b6f;
 }
 
 .color-scheme-night {
@@ -78,6 +78,7 @@ ul {
     list-style: none;
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 ol {

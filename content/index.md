@@ -1,4 +1,4 @@
-- ![A small Photo of Fabio](/images/itsmefabio.jpg) Fábio
+- ![A small Photo of Fabio](/images/itsmefabio-sm.jpg) Fábio
 - [Home](/index.html)
 - [Projects](/projects/index.html)
 - [Blog](/blog/index.html)
@@ -13,7 +13,7 @@
 
 I am a software developer with little more than 3 years of experience, recognized for my versatility, ability to adapt quickly to new technologies, and calm approach to solving problems.
 
-## My Tools
+## My current Tools
 
 ### Languages
 
@@ -21,6 +21,7 @@ I am a software developer with little more than 3 years of experience, recognize
 - Python
 - Go
 - PHP
+- Javascript and Typescript
 - SQL (Postgres and MySQL)
 
 ### Frameworks
