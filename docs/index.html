@@ -3,15 +3,103 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Hi! My name is Fábio Varela, I am a Software Developer</title>
+        <title>Hi! My name is Fábio Varela</title>
         <link href="/css/index.css" rel="stylesheet" />
     </head>
 
-    <body
-        style='background-image: url("/images/bg.jpg&quot); background-repeat: no-repeat; background-size: cover;'
-    >
+    <!--background-image: url("/images/bg.jpg&quot); background-repeat: no-repeat; background-size: cover;-->
+    <body style="background: var(--bg-color)">
         <article>
-            <main><div><ul><li> <img src="/images/itsmefabio-sm.jpg" alt="A small Photo of Fabio"/> Fábio</li><li> <a href="/index.html" target="_blank">Home</a></li><li> <a href="/projects/index.html" target="_blank">Projects</a></li><li> <a href="/blog/index.html" target="_blank">Blog</a></li><li> <a href="#contact" target="_blank">Contact</a></li><li> <a href="#resume" target="_blank">Resume</a></li></ul><h1>Hi! My name is Fábio Varela, I am a Software Developer</h1><h5>Dedicated to the art and science of computers and programming</h5><p><img src="/images/itsmefabio.jpg" alt="A Photo of Fabio"/></p><p>I am a software developer with little more than 3 years of experience, recognized for my versatility, ability to adapt quickly to new technologies, and calm approach to solving problems.</p><h2>My current Tools</h2><h3>Languages</h3><ul><li> C</li><li> Python</li><li> Go</li><li> PHP</li><li> Javascript and Typescript</li><li> SQL (Postgres and MySQL)</li></ul><h3>Frameworks</h3><ul><li> Echo</li><li> Django</li><li> React</li><li> Ruby on Rails</li><li> Flask</li><li> Angular</li></ul><p>And many others.</p><p><hr/></p><p><u>Most</u> of this website was generated from markdown files by my very own <a href="https://github.com/FabioVV/PMark" target="_blank">static site generator</a></p><ul><li> <a href="www.linkedin.com/in/fabio-varela-413719217" target="_blank">Linkedin</a></li><li> <a href="https://github.com/fabioVV" target="_blank">GitHub</a></li></ul><h5>Fábio Varela @2025</h5></div></main>
+            <main>
+                <div>
+                    <nav>
+                        <ul class="nav-ul">
+                            <li class="li-img">
+                                <img
+                                    class="nav-img"
+                                    src="/images/me2.jpeg"
+                                    alt="A small Photo of Fabio"
+                                />
+                                <span>Fábio</span>
+                            </li>
+
+                            <div class="nav-expand-icon">
+                                <img
+                                    src="/images/opts.svg"
+                                    alt="Expand nav icon"
+                                    onclick="toggleNav()"
+                                />
+                            </div>
+
+                            <div id="nav-ul-main" class="nav-ul-main-div">
+                                <div id="nav-close" class="nav-close">
+                                    <img
+                                        style="width: 30px; cursor: pointer"
+                                        src="/images/close.svg"
+                                        alt="Close nav icon"
+                                        onclick="toggleNav()"
+                                    />
+                                </div>
+                                <li>
+                                    <a href="/index.html" target="_blank"
+                                        >Home</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="/projects/index.html"
+                                        target="_blank"
+                                        >Projects</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/blog/index.html" target="_blank"
+                                        >Blog</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/blog/about.html" target="_blank"
+                                        >About</a
+                                    >
+                                </li>
+                            </div>
+                        </ul>
+                    </nav>
+
+                    <h5>Hi! My name is Fábio Varela</h5>
+                    <h2>I am a Software Developer</h2>
+                    <h5>
+                        Dedicated to the art and science of computers and
+                        programming
+                    </h5>
+                    <h1>Contact me</h1>
+                    <p>
+                        <u>Most</u> of this website was generated from markdown
+                        files by my very own
+                        <a
+                            href="https://github.com/FabioVV/PMark"
+                            target="_blank"
+                            >static site generator</a
+                        >
+                    </p>
+                    <ul>
+                        <li>
+                            <a
+                                href="www.linkedin.com/in/fabio-varela-413719217"
+                                target="_blank"
+                                >Linkedin</a
+                            >
+                        </li>
+                        <li>
+                            <a href="https://github.com/fabioVV" target="_blank"
+                                >GitHub</a
+                            >
+                        </li>
+                    </ul>
+                    <h5>Fábio Varela @2025</h5>
+                </div>
+            </main>
         </article>
+        <script src="/js/index.js"></script>
     </body>
 </html>

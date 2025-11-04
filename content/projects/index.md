@@ -1,8 +1,8 @@
+- ![A small Photo of Fabio](/images/me2.jpeg) Fábio
 - [Home](/index.html)
 - [Projects](/projects/index.html)
 - [Blog](/blog/index.html)
-- [Contact](#contact)
-- [Resume](#resume)
+- [About](/blog/about.html)
 
 # Projects
 

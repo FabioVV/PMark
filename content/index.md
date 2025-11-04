@@ -1,39 +1,17 @@
-- ![A small Photo of Fabio](/images/itsmefabio-sm.jpg) Fábio
+- ![A small Photo of Fabio](/images/me2.jpeg) Fábio
 - [Home](/index.html)
 - [Projects](/projects/index.html)
 - [Blog](/blog/index.html)
-- [Contact](#contact)
-- [Resume](#resume)
+- [About](/blog/about.html)
 
-# Hi! My name is Fábio Varela, I am a Software Developer
+##### Hi! My name is Fábio Varela
+
+## I am a Software Developer
 
 ##### Dedicated to the art and science of computers and programming
 
-![A Photo of Fabio](/images/itsmefabio.jpg)
+# Contact me
 
-I am a software developer with little more than 3 years of experience, recognized for my versatility, ability to adapt quickly to new technologies, and calm approach to solving problems.
-
-## My current Tools
-
-### Languages
-
-- C
-- Python
-- Go
-- PHP
-- Javascript and Typescript
-- SQL (Postgres and MySQL)
-
-### Frameworks
-
-- Echo
-- Django
-- React
-- Ruby on Rails
-- Flask
-- Angular
-
-And many others.
 
 _Most_ of this website was generated from markdown files by my very own [static site generator](https://github.com/FabioVV/PMark)
 

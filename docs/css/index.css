@@ -21,7 +21,7 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 20px;
-    max-width: 800px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -125,6 +125,65 @@ img {
     box-shadow: 3px 3px 6px var(--contrast-color-color);
 }
 
+.li-img {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.nav-ul {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.nav-ul-main-div {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-expand-icon {
+    display: none;
+}
+
+.nav-expand-icon > img {
+    cursor: pointer;
+}
+
+.nav-close {
+    display: none;
+    margin: 0 0 0 auto;
+    padding-right: 1.5rem;
+}
+
+.open {
+    display: block !important;
+}
+
+.nav-r-opened {
+    display: flex !important;
+    background: black;
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    align-items: normal;
+
+    padding-left: 20%;
+    padding-right: 15%;
+    padding-top: 10%;
+    list-style: upper-roman !important;
+}
+
 ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
@@ -152,4 +211,28 @@ img {
 
 ::-webkit-scrollbar-corner {
     background: var(--bg-color);
+}
+
+@media only screen and (max-width: 450px) {
+    .nav-expand-icon {
+        display: flex;
+    }
+    .nav-ul-main-div {
+        display: none;
+    }
+}
+
+/*@media only screen and (max-width: 400px) {
+    .nav-expand-icon {
+        display: flex;
+    }
+    .nav-ul-main-div {
+        display: none;
+    }
+}*/
+
+@media only screen and (max-width: 240px) {
+    .nav-ul {
+        flex-wrap: nowrap;
+    }
 }
