@@ -131,9 +131,13 @@ img {
 
 footer {
     display: flex;
+    justify-content: space-between;
     gap: 1rem;
     margin-top: 3rem;
     flex-wrap: wrap;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    padding: 1rem;
 }
 
 footer > * {
