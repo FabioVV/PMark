@@ -5,13 +5,6 @@
     --contrast-color: #6049ea;
 }
 
-.color-scheme-night {
-    --bg-color: #141413;
-    --text-color: #afaca1;
-    --title-color: #c9c8bf;
-    --contrast-color: #bdbbb2;
-}
-
 * {
     overflow-x: hidden;
 }
@@ -132,12 +125,14 @@ img {
 footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     margin-top: 3rem;
     flex-wrap: wrap;
     background-color: var(--bg-color);
     border-radius: 10px;
     padding: 1rem;
+    font-size: 12px;
 }
 
 footer > * {
@@ -153,6 +148,12 @@ form {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.footer-img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
 }
 
 .nav-img {
@@ -279,6 +280,25 @@ form {
     height: 1px;
     border: none;
     background: var(--contrast-color);
+}
+
+.about-me {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.me-img {
+}
+
+.me-img > img {
+    width: 300px;
+}
+
+.me-text {
+    background-color: var(--bg-color);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar {
