@@ -2,7 +2,7 @@
     --bg-color: #141413;
     --text-color: #afaca1;
     --title-color: #c9c8bf;
-    --contrast-color: #b89b6f;
+    --contrast-color: #6049ea;
 }
 
 .color-scheme-night {
@@ -220,6 +220,7 @@ form {
     inset: 0;
     flex-direction: column;
     align-items: normal;
+    margin-bottom: 0 !important;
 
     padding-left: 20%;
     padding-right: 15%;
