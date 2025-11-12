@@ -167,7 +167,7 @@ form {
     display: flex;
     align-items: center;
     gap: 5px;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -284,21 +284,28 @@ form {
 
 .about-me {
     display: flex;
-    flex-direction: row;
-    gap: 5px;
+    flex-direction: row-reverse;
+
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .me-img {
 }
 
 .me-img > img {
-    width: 300px;
+    width: 230px;
+    border-radius: 50%;
 }
 
 .me-text {
     background-color: var(--bg-color);
     padding: 5px;
     border-radius: 10px;
+}
+
+.presentation {
+    margin-top: 1rem;
 }
 
 ::-webkit-scrollbar {
